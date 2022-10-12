@@ -14,6 +14,9 @@ export const TicketList = () => {
                 const emergencyTickets = tickets.filter(ticket => ticket.emergency === true)
                 setFiltered(emergencyTickets)
             }
+            else {
+               setFiltered(tickets) 
+            }
         },
         [emergency]
     )
@@ -41,14 +44,29 @@ export const TicketList = () => {
             }
         }, [tickets]
     )
+    //~ Ternary statement can easily display or hide components depending on state (employee or not)
     return <>
-    <button
-        onClick={
-            () => {
-                setEmergency(true)
+    {
+        honeyUserObject.staff 
+        ? <>
+        <button
+            onClick={
+                () => {
+                    setEmergency(true)
+                }
             }
-        }
-        >Emergency Only</button>
+            >Emergency Only</button>
+            <button
+            onClick={
+                () => {
+                    setEmergency(false)
+                }
+            }
+            >Show All</button>
+            </>
+            : ""
+    }
+    <button></button>
         <h2>List of Tickets</h2>
 
         <article className="tickets">
